@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplos</title>
+</head>
+
+<body>
+    <h1>Ejemplos del curso</h1>
+    <template id="tmpl-saludo">
+        <h2>Hola <span>mundo</span></h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione provident impedit quod incidunt quidem
+            dolore dolores voluptatum, blanditiis, quis minus cum distinctio amet consequatur, ipsum perspiciatis
+            nesciunt eius itaque. Ducimus!</p>
+        <img src="./images/logo.png">
+    </template>
+
+    <script>
+        // let template = document.getElementById('tmpl-saludo');
+        // template.content.querySelector('span').textContent = 'Granada';
+        // console.log('contenido', template.content)
+        // document.body.appendChild(template.content);
+        // template = document.getElementById('tmpl-saludo')
+        // console.log('contenido', template.content)
+
+        let template = document.getElementById('tmpl-saludo');
+        let copia = template.content.cloneNode(true);
+        copia.querySelector('span').textContent = 'Granada';
+        document.body.appendChild(copia);
+        copia = template.content.cloneNode(true);
+        //copia.querySelector('span').textContent = 'Granada';
+        document.body.appendChild(copia);
+
+
+    </script>
+</body>
+
+</html>
