@@ -15,12 +15,18 @@
 <body>
     <h1>Ejemplos del curso</h1>
     <template id="tmpl-saludo">
+        <style>
+            span {
+                font-style: italic;
+            }
+        </style>
         <h2>Hola <span>mundo</span></h2>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione provident impedit quod incidunt quidem
             dolore dolores voluptatum, blanditiis, quis minus cum distinctio amet consequatur, ipsum perspiciatis
             nesciunt eius itaque. Ducimus!</p>
         <img src="./images/logo.png">
     </template>
+    <p>Esto esta <span>fuera</span> de la plantilla</p>
 
     <script>
         // let template = document.getElementById('tmpl-saludo');
@@ -34,9 +40,9 @@
         let copia = template.content.cloneNode(true);
         copia.querySelector('span').textContent = 'Granada';
         document.body.appendChild(copia);
-        copia = template.content.cloneNode(true);
-        //copia.querySelector('span').textContent = 'Granada';
-        document.body.appendChild(copia);
+        // copia = template.content.cloneNode(true);
+        // //copia.querySelector('span').textContent = 'Granada';
+        // document.body.appendChild(copia);
 
 
     </script>
@@ -68,7 +74,7 @@
             let cat = data[i];
             let clone = row.content.cloneNode(true);
             let cells = clone.querySelectorAll('td');
-            cells[2].textContent = cat.name;
+            // cells[2].textContent = cat.name;
             cells[2].innerHTML = `${cat.name || '(anonimo)'} <span class='sexo'></span>`;
             cells[1].textContent = cat.color;
             // cells[0].textContent = cat.sex;
@@ -76,6 +82,17 @@
             clone.querySelector('.sexo').textContent = cat.sex;
             row.parentNode.appendChild(clone);
         }
+    </script>
+
+    <script>
+        let fragmento = document.createElement('template')
+        let nombre = 'dinámico'
+        fragmento.innerHTML = /* html */`
+            <div>
+                Hola <span>${nombre}</span>
+            </div>
+        `
+        document.body.appendChild(fragmento.content);
     </script>
 
 </body>
