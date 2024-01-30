@@ -5,17 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejemplos</title>
-    <link rel="stylesheet" href="style.css">
     <style>
         .sexo {
             color: red;
+        }
+        span {
+            color: pink;
+        }
+        div {
+            font-size: 2em;
         }
     </style>
 </head>
 
 <body>
     <h1>Ejemplos del curso</h1>
+    <h2>Aquí no</h2>
     <template id="tmpl-saludo">
+        <link rel="stylesheet" href="style.css">
         <style>
             span {
                 font-style: italic;
@@ -37,15 +44,20 @@
         // template = document.getElementById('tmpl-saludo')
         // console.log('contenido', template.content)
 
-        let template = document.getElementById('tmpl-saludo');
-        let copia = template.content.cloneNode(true);
-        copia.querySelector('span').textContent = 'Granada';
-        document.body.appendChild(copia);
+        // let template = document.getElementById('tmpl-saludo');
+        // let copia = template.content.cloneNode(true);
+        // copia.querySelector('span').textContent = 'Granada';
+        // document.body.appendChild(copia);
         // copia = template.content.cloneNode(true);
         // //copia.querySelector('span').textContent = 'Granada';
         // document.body.appendChild(copia);
-
-
+        let div = document.createElement('div');
+        div.attachShadow({ mode: "open" })
+        let template = document.getElementById('tmpl-saludo');
+        let copia = template.content.cloneNode(true);
+        copia.querySelector('span').textContent = 'Granada';
+        div.shadowRoot.appendChild(copia);
+        document.body.appendChild(div);
     </script>
 
     <table>
@@ -89,13 +101,21 @@
         let fragmento = document.createElement('template')
         let nombre = 'dinámico'
         fragmento.innerHTML = /* html */`
+            <link rel="stylesheet" href="style.css">
             <div>
-                Hola <span>${nombre}</span>
+                <h2>Hola <span>${nombre}</span></h2>
             </div>
         `
-        document.body.appendChild(fragmento.content);
+        let otro = document.createElement('div');
+        otro.attachShadow({ mode: "open" })
+        otro.shadowRoot.appendChild(fragmento.content)
+        document.body.appendChild(otro);
     </script>
 
+    <script>
+        document.querySelectorAll(`span`).forEach(item => console.log(item.textContent))
+        div.shadowRoot.querySelectorAll(`span`).forEach(item => console.log('div', item.textContent))
+    </script>
 </body>
 
 </html>
