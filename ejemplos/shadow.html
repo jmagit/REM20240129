@@ -5,6 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shadow</title>
+    <style>
+        :root {
+            --color-fondo: red;
+        }
+
+        main {
+            --color-fondo: rgb(177, 98, 98);
+
+        }
+        div::part(title) {
+            background-color: lightgreen;
+        }
+        div::slotted(h3) {
+            font-style: italic;
+        }
+    </style>
 </head>
 
 <body>
@@ -16,11 +32,13 @@
                 font-style: italic;
             }
         </style>
-        <h2>Hola <span>mundo</span></h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione provident impedit quod incidunt quidem
-            dolore dolores voluptatum, blanditiis, quis minus cum distinctio amet consequatur, ipsum perspiciatis
-            nesciunt eius itaque. Ducimus!</p>
-        <img src="./images/logo.png">
+        <article>
+            <h2 part="title">Hola <span>mundo</span></h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione provident impedit quod incidunt quidem
+                dolore dolores voluptatum, blanditiis, quis minus cum distinctio amet consequatur, ipsum perspiciatis
+                nesciunt eius itaque. Ducimus!</p>
+            <img src="./images/logo.png">
+        </article>
     </template>
     <p>Esto esta <span>fuera</span> de la plantilla</p>
 
@@ -47,19 +65,34 @@
         div.shadowRoot.appendChild(copia);
         document.body.appendChild(div);
     </script>
+    <main class="theme-light">
+        <div id="otro" class="activo">
+            <h3 slot="pie">Fin de sección</h3>
+            Anida
+        </div>
+    </main>
     <script>
         let fragmento = document.createElement('template')
         let nombre = 'dinámico'
         fragmento.innerHTML = /* html */`
             <link rel="stylesheet" href="style.css">
+            <style>
+                :host { border: 1px solid black; }
+                :host(.activo) { border: 2px solid red; }
+                h2 { background-color: var(--color-fondo, #eef); }
+                /* :host-context(.theme-light) h2 { background-color: #eef; } */
+            </style>
             <div>
                 <h2>Hola <span>${nombre}</span></h2>
+                <slot></slot>
+                <slot name="pie"></slot>
             </div>
         `
-        let otro = document.createElement('div');
+        // let otro = document.createElement('div');
+        let otro = document.querySelector('#otro');
         otro.attachShadow({ mode: "open" })
         otro.shadowRoot.appendChild(fragmento.content)
-        document.body.appendChild(otro);
+        // document.body.appendChild(otro);
     </script>
 
     <script>
