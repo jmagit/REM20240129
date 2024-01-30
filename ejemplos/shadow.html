@@ -90,8 +90,9 @@
         `
         // let otro = document.createElement('div');
         let otro = document.querySelector('#otro');
-        otro.attachShadow({ mode: "open" })
-        otro.shadowRoot.appendChild(fragmento.content)
+        let sombra = otro.attachShadow({ mode: "closed" })
+        // otro.shadowRoot.appendChild(fragmento.content)
+        sombra.appendChild(fragmento.content)
         // document.body.appendChild(otro);
     </script>
 
