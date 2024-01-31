@@ -10,7 +10,7 @@
     <main>
         <my-element title="El titulo" nombre="mundo" despide></my-element>
         <input id="txtNombre" type="text" value="mundo">
-        <my-counter></my-counter>
+        <my-counter delta="2"></my-counter>
     </main>
 
     <script type="module" src="./components/my-element.js"></script>
@@ -40,6 +40,9 @@
         customElements.whenDefined('my-element').then(() => {
             wc.cotilla()
             
+        })
+        customElements.whenDefined('my-counter').then(() => {
+            document.querySelector('my-counter').delta = 2
         })
         wc.addEventListener('click', () => {
             console.log('hace click')
