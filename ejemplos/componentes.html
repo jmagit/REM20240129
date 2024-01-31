@@ -7,6 +7,39 @@
 </head>
 <body>
     <h1>Componentes</h1>
-    
+    <my-element title="El titulo"></my-element>
+
+    <script type="module" src="./components/my-element.js"></script>
+    <!-- <script type="module" src="./components/kk.js"></script> -->
+
+    <script type="module">
+        import {MyElement} from  './components/my-element.js'
+        let wc = document.querySelector('my-element')
+        if(wc) {
+            console.log('el objeto existe')
+        } else {
+            console.log('el objeto no existe')
+        }
+        console.log(wc.title)
+
+        if(customElements.get('my-element')) {
+            console.log('my-element definido')
+        } else {
+            console.log('la están vistiendo')
+        }
+        customElements.whenDefined('my-element').then(() => {
+            wc.cotilla()
+            
+        })
+        wc.addEventListener('click', () => {
+            console.log('hace click')
+        })
+        console.log('termino el script')
+
+        let wc2 = new MyElement()
+        wc2.cotilla();
+        wc2.title = 'Otro titulo'
+        document.body.appendChild(wc2)
+    </script>
 </body>
 </html>
