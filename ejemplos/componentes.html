@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Componentes</title>
 </head>
+
 <body>
     <h1>Componentes</h1>
     <main>
@@ -13,14 +15,47 @@
         <my-counter delta="2"></my-counter>
     </main>
 
+    <template id="my-cardx">
+        <h1>Plantilla con identificador único</h1>
+        <section>
+            <h2 class="titulo">Titulo</h2>
+            <slot>(vacío)</slot>
+            <slot name="pie"></slot>
+        </section>
+    </template>
+    <template id="my-card-personalizado">
+        <h1>Plantilla con identificador propio</h1>
+        <article>
+            <div class="titulo">Titulo</div>
+            <slot>(vacío)</slot>
+            <slot name="pie"></slot>
+        </article>
+        <my-element title="El titulo" nombre="plantilla" despide></my-element>
+    </template>
+
+    <my-card title="Ejemplo con plantilla" template="my-card-personalizado">
+        <div slot="pie">
+            <hr>
+            <footer>Este es el pie</footer>
+        </div>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, libero dolor odio dolorem tempore harum
+        cumque ut recusandae ea aliquid at autem iste numquam, expedita culpa doloribus iure, illum eius.
+        <my-counter init="100"></my-counter>
+    </my-card>
+    <my-card title="Ejemplo con plantilla">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, libero dolor odio dolorem tempore harum
+        cumque ut recusandae ea aliquid at autem iste numquam, expedita culpa doloribus iure, illum eius.
+    </my-card>
+
     <script type="module" src="./components/my-element.js"></script>
     <script type="module" src="./components/my-counter.js"></script>
+    <script type="module" src="./components/my-card.js"></script>
     <!-- <script type="module" src="./components/kk.js"></script> -->
 
     <script type="module">
-        import {MyElement} from  './components/my-element.js'
+        import { MyElement } from './components/my-element.js'
         let wc = document.querySelector('my-element')
-        if(wc) {
+        if (wc) {
             console.log('el objeto existe')
         } else {
             console.log('el objeto no existe')
@@ -32,14 +67,14 @@
             wc.nombre = ev.target.value
         })
 
-        if(customElements.get('my-element')) {
+        if (customElements.get('my-element')) {
             console.log('my-element definido')
         } else {
             console.log('la están vistiendo')
         }
         customElements.whenDefined('my-element').then(() => {
             wc.cotilla()
-            
+
         })
         customElements.whenDefined('my-counter').then(() => {
             document.querySelector('my-counter').delta = 2
@@ -56,4 +91,5 @@
         document.body.appendChild(wc2)
     </script>
 </body>
+
 </html>
