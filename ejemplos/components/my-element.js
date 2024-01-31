@@ -12,9 +12,11 @@ export class MyElement extends HTMLElement {
     render() {
         // es llamado cuando el elemento es agregado al documento (puede ser llamado varias veces si un elemento es agregado y quitado repetidamente)
         if (this._despide) {
-            this.textContent = `Adios ${this._nombre}`
+            // this.textContent = `Adios ${this._nombre}`
+            this.innerHTML = /*html*/`<div>Adios <span>${this._nombre}</span></div>`
         } else {
-            this.textContent = `Hola ${this._nombre}`
+            // this.textContent = `Hola ${this._nombre}`
+            this.innerHTML = /*html*/`<div>Hola <span>${this._nombre}</span></div>`
         }
     }
 
