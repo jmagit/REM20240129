@@ -7,7 +7,10 @@
 </head>
 <body>
     <h1>Componentes</h1>
-    <my-element title="El titulo"></my-element>
+    <main>
+        <my-element title="El titulo" nombre="mundo" despide></my-element>
+        <input id="txtNombre" type="text" value="mundo">
+    </main>
 
     <script type="module" src="./components/my-element.js"></script>
     <!-- <script type="module" src="./components/kk.js"></script> -->
@@ -21,6 +24,11 @@
             console.log('el objeto no existe')
         }
         console.log(wc.title)
+
+        txtNombre.addEventListener('input', ev => {
+            // wc.setAttribute('nombre', ev.target.value)
+            wc.nombre = ev.target.value
+        })
 
         if(customElements.get('my-element')) {
             console.log('my-element definido')
@@ -39,6 +47,7 @@
         let wc2 = new MyElement()
         wc2.cotilla();
         wc2.title = 'Otro titulo'
+        wc2.nombre = 'Granada'
         document.body.appendChild(wc2)
     </script>
 </body>
