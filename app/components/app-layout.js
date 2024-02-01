@@ -63,12 +63,12 @@ template.innerHTML = /* html */`
     </style>
     <app-header></app-header>
     <section>
-        <article part="main">
-            <slot id="main">(Falta el contenido)</slot>
-        </article>
         <nav part="aside">
             <slot id="aside" name="aside"></slot>
         </nav>    
+        <article part="main">
+            <slot id="main">(Falta el contenido)</slot>
+        </article>
     </section>
     <app-footer></app-footer>
     `

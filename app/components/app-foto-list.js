@@ -19,7 +19,7 @@ template.innerHTML = /* html */`
     background-color: #dddddd;
     }
     </style>
-    <my-paginator first="10" last="20"></my-paginator>
+    <my-paginator last="20"></my-paginator>
     <table>
         <thead>
             <tr>
