@@ -32,7 +32,7 @@
 
 <body>
     <h1>Componentes</h1>
-    <my-calculadora></my-calculadora>
+    <my-calculadora id="calc" coma></my-calculadora>
     <main>
         <my-element title="El titulo" nombre="mundo" despide style="color:green"></my-element>
         <input id="txtNombre" type="text" value="mundo">
@@ -135,6 +135,10 @@
         // txtNombre.addEventListener('click', cotilla)
         myCont.addEventListener('change', ev => {
             console.log(`El valor es ${ev.detail}`)
+            txtNumeros.value = ev.detail
+        })
+        calc.addEventListener('change', ev => {
+            console.log(`El valor calculado es ${ev.detail}`)
             txtNumeros.value = ev.detail
         })
     </script>
