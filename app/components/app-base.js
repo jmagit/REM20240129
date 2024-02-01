@@ -3,7 +3,7 @@ template.innerHTML = /* html */`
     <hr>
     <div>&copy; 2024 Todos los derechos reservados</div>
     `
-class AppFooter extends HTMLElement {
+class AppBase extends HTMLElement {
     static observedAttributes = ['value'];
     constructor() {
         super();
@@ -15,4 +15,4 @@ class AppFooter extends HTMLElement {
         this.shadowRoot.appendChild(content);
     }
 }
-customElements.define('app-footer', AppFooter);
+customElements.define('app-base', AppBase);

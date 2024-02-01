@@ -16,7 +16,6 @@ class MyFromButtonsBlock extends HTMLElement {
         this.btnBack = content.getElementById('back')
         this.btnBack.addEventListener('click', () => this.dispatchEvent(new Event('back', { bubbles: true, composed: true })))
         this.shadowRoot.appendChild(content);
-        this.addEventListener
-    }
+   }
 }
 customElements.define('my-from-button-block', MyFromButtonsBlock);
