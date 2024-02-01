@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina 3</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        app-layout::part(aside) {
+            background-color: lightcyan;
+        }
+    </style>
+</head>
+<body>
+    <app-layout>
+    <h1>Pagina 3</h1>
+    <app-foto-list></app-foto-list>
+    <aside slot="aside">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur sed soluta eaque iure illo, </aside>
+    </app-layout>
+
+    <script type="module" src="./components/app-layout.js"></script>
+    <script type="module" src="./components/app-foto-list.js"></script>
+</body>
+</html>
