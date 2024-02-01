@@ -5,15 +5,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Componentes</title>
+    <style>
+        body {
+            color: darkcyan;
+        }
+        my-card {
+            border: 1px dotted red; 
+            color: brown;
+        }
+        ::slotted(div) {
+            background-color: lightblue;
+        }
+        my-counter::part(pantalla) {
+            border: 1px solid grey;
+            min-width: 100px;
+        }
+        my-element:not(:defined) {
+            display: block;
+            height: 100px;
+            width: 100px;
+            background-color: red;
+        }
+
+    </style>
 </head>
 
 <body>
     <h1>Componentes</h1>
     <main>
-        <my-element title="El titulo" nombre="mundo" despide></my-element>
+        <my-element title="El titulo" nombre="mundo" despide style="color:green"></my-element>
         <input id="txtNombre" type="text" value="mundo">
-        <my-counter delta="2"></my-counter>
     </main>
+    <div>
+        <input id="txtNumeros" type="number" value="10">
+        <my-counter id="myCont" delta="2"></my-counter>
+    </div>
 
     <template id="my-cardx">
         <h1>Plantilla con identificador único</h1>
@@ -24,6 +50,13 @@
         </section>
     </template>
     <template id="my-card-personalizado">
+        <style>
+            :host {
+                all: initial;
+                display: block;
+                border: 1px solid black; 
+            }
+        </style>
         <h1>Plantilla con identificador propio</h1>
         <article>
             <div class="titulo">Titulo</div>
@@ -89,6 +122,19 @@
         wc2.title = 'Otro titulo'
         wc2.nombre = 'Granada'
         document.body.appendChild(wc2)
+        function cotilla(ev) {
+            // if(ev.cancelBubble) return
+            console.log(ev.composedPath())
+            ev.preventDefault()
+            // txtNombre.removeEventListener('click', cotilla)
+        }
+        txtNombre.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, }))
+        document.body.addEventListener('click', cotilla)
+        // txtNombre.addEventListener('click', cotilla)
+        myCont.addEventListener('change', ev => {
+            console.log(`El valor es ${ev.detail}`)
+            txtNumeros.value = ev.detail
+        })
     </script>
 </body>
 
