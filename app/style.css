@@ -1,0 +1,16 @@
+:root {
+  --color-principal: red;
+}
+
+body {
+  margin: 0;
+  color: black;
+}
+
+main {
+  margin: 0px 5px;
+}
+
+label {
+  color: var(--color-principal);
+}
