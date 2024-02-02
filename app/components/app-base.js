@@ -1,9 +1,9 @@
 let template = document.createElement('template');
 template.innerHTML = /* html */`
+    <h1></h1>
     <hr>
-    <div>&copy; 2024 Todos los derechos reservados</div>
     `
-class AppBase extends HTMLElement {
+export class AppBase extends HTMLElement {
     static observedAttributes = ['value'];
     constructor() {
         super();
@@ -11,7 +11,7 @@ class AppBase extends HTMLElement {
     }
     connectedCallback() {
         let content = template.content.cloneNode(true);
-
+        content.querySelector('h1').textContent = this.title
         this.shadowRoot.appendChild(content);
     }
 }
