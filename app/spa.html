@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: lightblue;
+            padding: 30px;
+            text-align: center;
+            font-size: 35px;
+            color: white;
+            display: block;
+            margin: 0;
+        }
+
+        app-footer {
+            display: block;
+            background-color: lightblue;
+            padding: 10px;
+            text-align: center;
+            color: white;
+        }
+
+        section nav {
+            float: left;
+            width: 30%;
+            min-height: 300px;
+            /* only for demonstration, should be removed */
+            background: #ccc;
+            padding: 20px;
+        }
+
+        article {
+            float: left;
+            padding: 20px;
+            width: 70%;
+            background-color: #f1f1f1;
+            min-height: 300px;
+            /* only for demonstration, should be removed */
+        }
+
+        /* Clear floats after the columns */
+        section::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .foto {
+            max-width: 100%;
+        }
+        @media (max-width: 600px) {
+
+            nav,
+            article {
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a id="m1" href="index.html">Home</a> |&nbsp;
+            <a id="m2" href="page-1.html">Page 1</a> |&nbsp;
+            <a id="m3" href="page-2.html">Page 2</a> |&nbsp;
+            <a id="m4" href="page-3.html">Page 3</a> |&nbsp;
+            <a href="index.html">MPA</a>
+        </nav>
+    </header>
+    <section>
+        <nav part="aside">
+        </nav>    
+        <article id="contenido"><br></article>
+    </section>
+    <app-footer></app-footer>
+
+    <script type="module" src="./components/main-page-index.js"></script>
+    <script type="module">
+        import { AppBase } from './components/app-base.js'
+        import { AppContactosForm } from './components/app-contactos-form.js'
+        import { AppFotoList } from './components/app-foto-list.js'
+
+        function selecciona(mnu) {
+            let custom
+            document.querySelector('[part=aside]').textContent = null
+            switch (mnu) {
+                case "m1":
+                    custom = new AppBase()
+                    custom.title = 'Inicio'
+                    break;
+                case "m2":
+                    custom = new AppBase()
+                    custom.title = 'Page 1'
+                    break;
+                case "m3":
+                    custom = new AppContactosForm()
+                    break;
+                case "m4":
+                    custom = new AppFotoList()
+                    let img = document.createElement('img')
+                    img.className = "foto"
+                    document.querySelector('[part=aside]').appendChild(img)
+                    custom.addEventListener('select', ev => {
+                        img.src = ev.detail
+                    })
+                    break;
+                default:
+                    return
+            }
+            contenido.firstChild.replaceWith(custom)
+        }
+        const clickHandler = ev => {
+            ev.preventDefault()
+            selecciona(ev.target.id)
+        }
+        document.querySelector('nav')
+            .querySelectorAll('a')
+            .forEach(item => {
+                if (item.id) {
+                    item.addEventListener('click', clickHandler)
+                }
+            })
+        selecciona(document.querySelector('nav').firstElementChild.id)
+    </script>
+</body>
+
+</html>

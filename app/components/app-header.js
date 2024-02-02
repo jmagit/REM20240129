@@ -13,7 +13,8 @@ template.innerHTML = /* html */`
             <a href="index.html">Home</a> |&nbsp;
             <a href="page-1.html">Page 1</a> |&nbsp;
             <a href="page-2.html">Page 2</a> |&nbsp; 
-            <a href="page-3.html">Page 3</a> 
+            <a href="page-3.html">Page 3</a> |&nbsp; 
+            <a href="spa.html">SPA</a> 
         </nav>
     </header>
     `

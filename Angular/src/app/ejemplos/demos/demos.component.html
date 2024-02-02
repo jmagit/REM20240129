@@ -1,0 +1,109 @@
+<!-- <app-notification /> -->
+<p>
+  <input type="button" value="Error" (click)="vm.add('Esto es una notificación de error')">
+  <input type="button" value="Warn" (click)="vm.add('Esta notificación es un aviso',  vm.NotificationType.warn)">
+  <input type="button" value="Info" (click)="vm.add('Solo una notificación informativa',  vm.NotificationType.info)">
+  <input type="button" value="Log" (click)="vm.add('Para trazar con notificaciones',  vm.NotificationType.log)">
+</p>
+<div>
+  <progress max="1000" [value]="progress" class="h-100 p-3" ></progress>
+  <input type="button" class="btn btn-danger ml-2" value="In Zone" (click)="inZone()" >
+  <input type="button" class="btn btn-success" value="Out Zone" (click)="outZone()" >
+</div>
+<app-form-buttons (send)="saluda()" [send-text]="'saluda'" (cancel)="despide()" [cancel-text]="'despide'" />
+<app-card header="Ejemplo de transclude">
+  <h1>Hola {{Nombre | elipsis:10 | uppercase}}</h1>
+  <p>Fecha: {{fecha | date:'dd/MMMM/yyyy'}}</p>
+  <p>Fecha: {{fecha | date}}</p>
+
+  <p>
+    <input type="text" [(ngModel)]="Nombre" >
+    <input type="button" value="saluda" (click)="saluda()">
+    <input type="button" value="despide" (click)="despide()">
+    <input type="button" value="di algo" (click)="di('algo')">
+    <input type="button" value="cambia" (click)="cambia()">
+  </p>
+  <p [textContent]="resultado">Esto se pierde</p>
+  <p [innerHTML]="resultado">Esto se pierde</p>
+</app-card>
+
+<p [hidden]="!visible">Ahora me ves</p>
+<p *ngIf="visible">Ahora existo</p>
+@if(visible) {
+  <p>Ahora existo</p>
+}
+<p [ngClass]="estetica">
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, fugit. Debitis enim impedit neque, officiis sapiente error, provident incidunt aliquam nihil quos atque, corrupti explicabo modi sequi! Eum, minima repudiandae!
+</p>
+<p [class.semivisible]="!visible">Ahora me ves bien</p>
+
+<!-- <p>Calcula: 2 + 2 = {{2+2}} = {{calcula(2, 2) |currency:'EUR':'symbol':'1.2-2'}}</p> -->
+<p>Calcula: 2 + 2 = {{2+2}} = {{calcula | exec:fontSize:2 |currency:'EUR':'symbol':'1.2-2'}}</p>
+
+<ul>
+  <li *ngFor="let p of listado | slice:-5; let indice=index; let fondo=odd;"
+    [style.background-color]="fondo ? 'LightBlue' : 'Lavender'">
+    {{p.nombre | titlecase}} ({{p.id}}) [Elemento {{indice + 1}} de {{listado.length}}]
+  </li>
+</ul>
+<ol>
+@for(p of listado; track p.id) {
+  <li [style.background-color]="$odd ? 'LightBlue' : 'Lavender'">
+    {{p.nombre | capitalize}} ({{p.id}}) [Elemento {{$index + 1}} de {{$count}}]
+  </li>
+}
+</ol>
+<p>
+  <select [(ngModel)]="idProvincia" >
+    <option value="">--Elige opción--</option>
+    @for(p of listado; track p.id) { <option [value]="p.id">{{p.nombre}}</option> }
+  </select>
+  Seleccionado: {{idProvincia}}
+  <input type="text" value="Tabarnia" #txtProvincia >
+  <button type="button" (click)="add(txtProvincia.value)">Add</button>
+</p>
+<my-sizer [(size)]="fontSize" />
+<p [style.font-size.px]="fontSize">
+{{ listado | json}}
+</p>
+<div class="container theme-dark">
+  <div class="row">
+    <div class="col">
+      <calculadora [SeparadorDecimal]="','" (updated)="ponResultado('IZQ', $event)" />
+    </div>
+    <table class="col table table-striped">
+      <thead>
+        <tr>
+          <th>Nº</th>
+          <th>Calc</th>
+          <th>Resultado</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="3">Idioma: <select [(ngModel)]="idioma">
+              @for (i of idiomas; track i.codigo) {
+                <option [value]="i.codigo">{{i.region}}</option>
+              }
+            </select>
+          </td>
+        </tr>
+      </tfoot>
+      <tbody>
+        @for (r of calculos | slice:-10; track r) {
+          <tr>
+            <td class="text-right">{{r.pos}}</td>
+            <td>{{r.origen}}</td>
+            <td class="text-right">{{r.valor | number:'1.0-8':idioma }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <div class="col">
+      <calculadora [init]="valCalculadora" (updated)="ponResultado('DER', $event)"></calculadora>
+    </div>
+  </div>
+  <div class="row">
+    <input type="number" [(ngModel)]="valCalculadora">
+  </div>
+</div>

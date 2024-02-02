@@ -37,11 +37,12 @@ template.innerHTML = /* html */`
             </template>
     </table>
 `
-class AppFotoList extends HTMLElement {
+export class AppFotoList extends HTMLElement {
     static observedAttributes = ['value'];
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
+        this.onSelect = this.onSelect.bind(this)
     }
     connectedCallback() {
         let content = template.content.cloneNode(true);
@@ -92,7 +93,13 @@ class AppFotoList extends HTMLElement {
                             cells[0].textContent = item.id;
                             cells[1].textContent = item.author;
                             cells[2].textContent = `${item.width} x ${item.height}`;
-                            cells[3].innerHTML = /* html */`<a href="${item.download_url}" target="_blank" >ver</a>`;
+                            // cells[3].innerHTML = /* html */`<a href="${item.download_url}" target="_blank" >ver</a>`;
+                            const enlace = document.createElement('a')
+                            enlace.href = item.download_url
+                            enlace.target = "_blank"
+                            enlace.textContent = 'ver'
+                            enlace.addEventListener('click', this.onSelect)
+                            cells[3].appendChild(enlace)
                             row.parentNode.appendChild(clone);
                         })
                     }).catch(err => console.error(err));
@@ -104,6 +111,10 @@ class AppFotoList extends HTMLElement {
                 console.error(err)
             }
         )
+    }
+    onSelect(ev) {
+        ev.preventDefault()
+        this.dispatchEvent(new CustomEvent('select', { detail: ev.target.href, bubbles: true, composed: true  }))
     }
 }
 customElements.define('app-foto-list', AppFotoList);

@@ -6,7 +6,7 @@ template.innerHTML = /* html */`
         * {
             box-sizing: border-box;
         }
-        <!-- .box {
+        /* .box {
             display: flex;
             flex-direction: row;
         }
@@ -18,7 +18,7 @@ template.innerHTML = /* html */`
         #main::slotted(*) {
             flex: 3;
             align-items:center;
-        } -->
+        } */
         app-header {
             background-color: lightblue;
             padding: 30px;

@@ -18,7 +18,7 @@ template.innerHTML = /* html */`
         <my-from-button-block></my-from-button-block>
     </form>
     `
-class AppContactosForm extends HTMLElement {
+export class AppContactosForm extends HTMLElement {
     static observedAttributes = ['value'];
     constructor() {
         super();
