@@ -15,6 +15,7 @@ export function Demos(props) {
     let nombre = "Don Jose";
     return (
         <>
+            <Saluda nombre="Algo" />
             <p>
                 <output style={{ color: 'blue' }}>{cont}</output>
 
